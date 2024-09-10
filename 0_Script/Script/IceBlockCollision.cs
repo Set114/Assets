@@ -100,15 +100,16 @@ public class IceBlockCollision : MonoBehaviour
         }
         else if (count == 2)
         {
-            // 假設 EndLevel 是個花費時間的過程
-            T213UI.SetActive(false);            
+            Debug.Log("count 2 start");
+            // 假設 EndLevel 是個花費時間的過程    
             yield return new WaitForSeconds(1f);
-            T213UI.SetActive(true);
+            iceBlockCollisionStage1UI.TestUIShow();
             levelEndSequence.EndLevel(false, false, 2f, 0f, 5f, 0f,"1");
             Debug.Log("end");
         }
-        yield return new WaitForSeconds(2f);
         count++;
+        Debug.Log("ADD Count" + count);
+
     }
 
     public void TestDataStart(int countindex)

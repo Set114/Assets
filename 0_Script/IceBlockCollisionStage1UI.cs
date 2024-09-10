@@ -52,4 +52,9 @@ public class IceBlockCollisionStage1UI : MonoBehaviour
         TestUI.SetActive(true);
         T213UI.SetActive(true);
     }
+
+    public void TestUIShow()
+    {
+        TestUI.SetActive(true);
+    }
 }
