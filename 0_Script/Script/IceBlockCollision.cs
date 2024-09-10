@@ -42,14 +42,14 @@ public class IceBlockCollision : MonoBehaviour
             Show2.SetActive(true);
             if(count == 0)
             {
-                Q1MarkShow();            
+                Q1MarkShow();       
+                TestDataStart(0);     
             }
         }
     }
     //第Q1Mark開始
     public void Q1MarkShow()
     {
-        TestDataStart();
         q1questionMark.SetActive(true);        
     }
 
@@ -62,7 +62,6 @@ public class IceBlockCollision : MonoBehaviour
     //第Q2Mark開始
     public void Q2MarkShow()
     {
-        TestDataStart();
         q2questionMark.SetActive(true);
     }
 
@@ -91,37 +90,35 @@ public class IceBlockCollision : MonoBehaviour
         {
             TestDataEnd();
             Q2MarkShow();
+            TestDataStart(1);
         }
         else if (count == 1)
         {
             TestDataEnd();
-            testDataManager.GetsId(2);
-            testDataManager.StartLevel();
+            TestDataStart(2);
             iceBlockCollisionStage1UI.T213ShowUI();
         }
         else if (count == 2)
         {
             // 假設 EndLevel 是個花費時間的過程
-            T213UI.SetActive(false);
-            levelEndSequence.EndLevel(false, false, 2f, 0f, 5f, 0f,"1");
-
+            T213UI.SetActive(false);            
             yield return new WaitForSeconds(1f);
             T213UI.SetActive(true);
+            levelEndSequence.EndLevel(false, false, 2f, 0f, 5f, 0f,"1");
+            Debug.Log("end");
         }
         yield return new WaitForSeconds(2f);
         count++;
     }
 
-    public void TestDataStart()
+    public void TestDataStart(int countindex)
     {
-        Debug.Log("TestDataStart" + count);
         testDataManager.StartLevel();
-        testDataManager.GetsId(count);
+        testDataManager.GetsId(countindex);
     }
 
     public void TestDataEnd()
     {
-        Debug.Log("TestDataEnd" + count);
         testDataManager.CompleteLevel();
         testDataManager.EndLevel();
     }

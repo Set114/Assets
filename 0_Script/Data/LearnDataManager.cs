@@ -126,7 +126,7 @@ public class LearnDataManager : MonoBehaviour
     }
     else
     {
-        Debug.LogWarning("開始時間或完成時間為空，無法上傳資料。");
+        // Debug.LogWarning("開始時間或完成時間為空，無法上傳資料。");
     }
     InitializeUploadObject();
     }
