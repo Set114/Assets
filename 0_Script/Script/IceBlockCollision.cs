@@ -1,0 +1,128 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
+
+
+public class IceBlockCollision : MonoBehaviour
+{
+    public GameObject Show1;
+    public GameObject Show2;
+    public string targetTag = "Object";
+
+    [Header("Mark")]
+    public GameObject q1questionMark;
+    public GameObject q2questionMark;
+    [Header("UI")]
+    public GameObject T213UI;
+    [Header("Button")]
+    public Button q1question_btn;
+    public Button q2question_btn;
+    public Button Close_btn;
+
+    public LevelEndSequence levelEndSequence;
+    public TestDataManager testDataManager;
+    public IceBlockCollisionStage1UI iceBlockCollisionStage1UI;
+    int count = 0;
+
+    void Start()
+    {
+        q1question_btn.onClick.AddListener(Q1question);
+        q2question_btn.onClick.AddListener(Q2question);
+        Close_btn.onClick.AddListener(Close_controler);
+    }       
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(targetTag))
+        {
+            Show1.SetActive(true);
+            Show2.SetActive(true);
+            if(count == 0)
+            {
+                Q1MarkShow();            
+            }
+        }
+    }
+    //第Q1Mark開始
+    public void Q1MarkShow()
+    {
+        TestDataStart();
+        q1questionMark.SetActive(true);        
+    }
+
+    void Q1question()
+    {
+        q1questionMark.SetActive(false);
+        iceBlockCollisionStage1UI.ShowQuestionUI(count); 
+    }
+
+    //第Q2Mark開始
+    public void Q2MarkShow()
+    {
+        TestDataStart();
+        q2questionMark.SetActive(true);
+    }
+
+    // 當Q2問題按鈕被點擊時
+    void Q2question()
+    {
+        q2questionMark.SetActive(false);
+        iceBlockCollisionStage1UI.ShowQuestionUI(count); 
+    }
+
+    // // 當Q3問題按鈕被點擊時
+    void Q3question()
+    {
+        iceBlockCollisionStage1UI.ShowQuestionUI(count);   
+    }
+
+    //控制結算
+    void Close_controler()
+    {
+        StartCoroutine(WaitAndStartNextLevel());
+    }
+
+    private IEnumerator WaitAndStartNextLevel()
+    {
+        if (count == 0)
+        {
+            TestDataEnd();
+            Q2MarkShow();
+        }
+        else if (count == 1)
+        {
+            TestDataEnd();
+            testDataManager.GetsId(2);
+            testDataManager.StartLevel();
+            iceBlockCollisionStage1UI.T213ShowUI();
+        }
+        else if (count == 2)
+        {
+            // 假設 EndLevel 是個花費時間的過程
+            T213UI.SetActive(false);
+            levelEndSequence.EndLevel(false, false, 2f, 0f, 5f, 0f,"1");
+
+            yield return new WaitForSeconds(1f);
+            T213UI.SetActive(true);
+        }
+        yield return new WaitForSeconds(2f);
+        count++;
+    }
+
+    public void TestDataStart()
+    {
+        Debug.Log("TestDataStart" + count);
+        testDataManager.StartLevel();
+        testDataManager.GetsId(count);
+    }
+
+    public void TestDataEnd()
+    {
+        Debug.Log("TestDataEnd" + count);
+        testDataManager.CompleteLevel();
+        testDataManager.EndLevel();
+    }
+}
