@@ -32,7 +32,7 @@ public class IceBlockCollisionStage1UI : MonoBehaviour
     public void ShowQuestionUI(int questionIndex)
     {
         TestUI.SetActive(true);
-        TestShowUI.SetActive(false);
+        TestUIHide();
         
         if (questionIndex >= 0 && questionIndex < questionUIs.Length)
         {
@@ -46,15 +46,18 @@ public class IceBlockCollisionStage1UI : MonoBehaviour
 
     public void T213ShowUI()
     {
-        TestShowUI.SetActive(true);
+        TestUIShow();
         item.SetActive(false);
 
         TestUI.SetActive(true);
         T213UI.SetActive(true);
     }
-
+    public void TestUIHide()
+    {
+        TestShowUI.SetActive(false);
+    }
     public void TestUIShow()
     {
-        TestUI.SetActive(true);
+        TestShowUI.SetActive(true);
     }
 }

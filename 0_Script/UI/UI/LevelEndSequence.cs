@@ -66,7 +66,6 @@ public class LevelEndSequence : MonoBehaviour
             //cameraController.ZoomIn(); // 縮放鏡頭            
         }
         
-        Debug.Log("WAIT");
         StartCoroutine(DelayedLevelChange()); // 開始延遲關卡變更
     }
 
@@ -100,7 +99,6 @@ public class LevelEndSequence : MonoBehaviour
     // 延遲顯示下一個 UI
     IEnumerator ShowNextUIAfterDelay(float delay)
     {
-        Debug.Log("in the end");
         chapterMode = gameManager.GetChapterMode();
         yield return new WaitForSeconds(delay); // 等待指定時間
         switchUI.CompletedState(levelCount);
@@ -109,7 +107,6 @@ public class LevelEndSequence : MonoBehaviour
         if(showEndUI == false)
         {
             switchUI.ShowNextUI(); // 顯示下一個 UI
-            Debug.Log("SHOW NEXT UI");
         }
         else 
         {
