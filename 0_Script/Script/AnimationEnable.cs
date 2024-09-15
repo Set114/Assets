@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class AnimationEnable : MonoBehaviour
 {
@@ -17,49 +16,47 @@ public class AnimationEnable : MonoBehaviour
 
     private bool a1 = false;
     public LevelEndSequence levelEndSequence;
-    // public Stage5_UIManager stage5_UIManager;
-    public ScreenShow screenShow;
-    // public ELFStatus elfStatus;
+    public FeAniAnimationController feAniAnimationController1;
+    public FeAniAnimationController feAniAnimationController2;
 
     void Start()
     {
-        Button.onClick.AddListener(() => OnButtonClicked(h2o, canva1));
-        h2o.SetActive(false);
-        Button.onClick.AddListener(End);
-    }
-    
-    private void End()
-    {
-        // screenShow.ShowScreen(1f);
-        levelEndSequence.EndLevel(false,true,2f,0f,8f,0f,"1");
-        StartCoroutine(HideScreenActive(5f));
-        
-        // h2oNo.SetActive(false);
-        
+        // Button.onClick.AddListener(() => OnButtonClicked(h2o, canva1));
+        Button.onClick.AddListener(Level1);
     }
 
+    private void Level1()
+    {
+        feAniAnimationController1.ResumeAnimation();
+        End();
+    }
 
     IEnumerator HideScreenActive(float delayTime)
     {
-        h2o.SetActive(false);
         yield return new WaitForSeconds(delayTime);
-        // screenShow.HideScreen();
     }
     
     private void Update()
     {
         if(WaterScaleCubeScript.isMove &&!a1)
         {
-            OnButtonClicked(h2oNo , canva2);
-            a1 = true;
+            feAniAnimationController2.ResumeAnimation();
             End();
+            // OnButtonClicked(h2oNo , canva2);
+            a1 = true;
         }
    }
-
-    public void OnButtonClicked(GameObject a , GameObject canva)
+    
+    private void End()
     {
-        a.SetActive(true);
-        h2o.SetActive(true);
-        //canva.SetActive(true);
+        levelEndSequence.EndLevel(false,true,2f,0f,8f,0f,"1");
+        StartCoroutine(HideScreenActive(5f));
     }
+
+
+    // public void OnButtonClicked(GameObject a , GameObject canva)
+    // {
+    //     // a.SetActive(true);
+    //     //canva.SetActive(true);
+    // }
 }
