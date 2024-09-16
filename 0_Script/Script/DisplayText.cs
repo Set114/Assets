@@ -45,8 +45,9 @@ public class DisplayText : MonoBehaviour
 
     public void ignition()
     {
+        float index = 50;
         StartCoroutine(AnimateText(displayText3));
-        StartCoroutine(AnimateTemperature(50));
+        StartCoroutine(AnimateTemperature(index));
     }
 
     public void flow()
@@ -83,7 +84,21 @@ public class DisplayText : MonoBehaviour
 
     private IEnumerator AnimateTemperature(float targetTemperature)
     {
-        float currentTemperature = float.Parse(temperature_text.text.Replace("°C", ""));
+        // 檢查溫度字串是否為空
+        if (string.IsNullOrEmpty(temperature_text.text))
+        {
+            Debug.LogError("Temperature text is empty or null.");
+            yield break; // 直接退出 Coroutine，避免解析錯誤
+        }
+
+        // 嘗試解析當前溫度
+        float currentTemperature;
+        if (!float.TryParse(temperature_text.text.Replace("°C", ""), out currentTemperature))
+        {
+            Debug.LogError("Failed to parse temperature: " + temperature_text.text);
+            yield break; // 如果解析失敗，直接退出 Coroutine
+        }
+
         float duration = 4.0f;
         float elapsed = 0f;
 
@@ -91,10 +106,10 @@ public class DisplayText : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float newTemperature = Mathf.Lerp(currentTemperature, targetTemperature, elapsed / duration);
-            temperature_text.text = Mathf.RoundToInt(newTemperature).ToString() + "°C";
+            temperature_text.text = Mathf.RoundToInt(newTemperature).ToString();
             yield return null;
         }
 
-        temperature_text.text = targetTemperature.ToString() + "°C";
+        temperature_text.text = targetTemperature.ToString();
     }
 }
