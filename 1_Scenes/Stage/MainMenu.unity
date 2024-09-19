@@ -8354,7 +8354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940713757}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e90edf40189c6614eb6d6554a5ac5e15, type: 3}
   m_Name: 
@@ -8376,18 +8376,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940713757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf14d19a275b224a88906e1cc6e5dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Loading_sign: {fileID: 1755019014}
+  login_btn: {fileID: 306379982}
   cityDropdown: {fileID: 603298575}
   areaDropdown: {fileID: 107058612}
   schoolDropdown: {fileID: 1460757988}
   yearDrop: {fileID: 1721852868}
   classDrop: {fileID: 1951603933}
   studentDropdown: {fileID: 533968196}
+  menuUIManager: {fileID: 1566999637}
   gameManager: {fileID: 0}
 --- !u!114 &940713761
 MonoBehaviour:

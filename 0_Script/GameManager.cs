@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public string currentPlayerID;
     public string currentPlayerName;
     public string currentSchID;
-    public string currentMail;
-    public string currentYear;
+    // public string currentMail;
+    // public string currentYear;
     public string currentClass;
     public int currentUid;
     public int chapterMode;
@@ -82,15 +82,15 @@ public class GameManager : MonoBehaviour
         return currentPlayerID;
     }
 
-    public string GetMail()
-    {
-        return currentMail;
-    }
+    // public string GetMail()
+    // {
+    //     return currentMail;
+    // }
 
-    public string GetYear()
-    {
-        return currentYear;
-    }
+    // public string GetYear()
+    // {
+    //     return currentYear;
+    // }
 
     public string GetClass()
     {
@@ -113,13 +113,11 @@ public class GameManager : MonoBehaviour
     }
 
     // 設置玩家資料
-    public void SetPlayerData(string schoolID, string year, string classData, string studentID, string studentName, string mail)
+    public void SetPlayerData(string schoolID,string classData, string studentID, string studentName)
     {
         currentPlayerID = studentID; 
         currentPlayerName = studentName; 
         currentSchID = schoolID;
-        currentMail = mail;
-        currentYear = year;
         currentClass = classData;
         // Debug.Log("Set player data in GameManager.");
     }

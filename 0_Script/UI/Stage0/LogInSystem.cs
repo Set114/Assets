@@ -24,7 +24,6 @@ public class LogInSystem : MonoBehaviour
     private string classData = "";
     private string studentNameData = "";
     private string studentIDData = "";
-    private string mail = "";
 
     public MenuUIManager menuUIManager;
     public GameManager gameManager;
@@ -243,10 +242,6 @@ public class LogInSystem : MonoBehaviour
 
     void UploadDataToGameManager()
     {
-        mail = "pinkylin0726@gmail.com";
-        schoolData = "173510";
-        // 在這裡調用 GameManager 的 SetPlayerData 方法來上傳資料
-        GameManager.Instance.SetPlayerData(schoolData, yearData, classData, studentIDData, studentNameData, mail);
+        GameManager.Instance.SetPlayerData(schoolData, classData, studentIDData, studentNameData);
     }
 }
-

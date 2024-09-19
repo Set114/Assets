@@ -17,26 +17,20 @@ public class Login : MonoBehaviour
     private string ClassID = "";
     private string TeacherDataID = "";
     private string selectedStudentID = "";
+    private string selectedStudentName = "";
     
     //中文資料
     private string CityData;
     private string AreaData;
     private string SchoolData;
 
-    // private string cityData = "";
-    // private string regionData = "";
-    // private string schoolData = "";
-    // private string yearData = "";
-    // private string classData = "";
-    // private string studentNameData = "";
-    // private string studentIDData = "";
-    // private string mail = "";
-    
     // 學年資料
     private List<ClassData> classDataList = new List<ClassData>();
 
     [Header("Loading")]
     public GameObject Loading_sign;
+    [Header("Button")]
+    [SerializeField] Button login_btn;
     [Header("SignUp")]
     public Dropdown cityDropdown;
     public Dropdown areaDropdown;
@@ -65,14 +59,10 @@ public class Login : MonoBehaviour
     private Dictionary<string, string> cityData = new Dictionary<string, string>();
     private Dictionary<string, string> areaData = new Dictionary<string, string>();
     private Dictionary<string, string> schoolData = new Dictionary<string, string>();
-
     // 學年對應的班級資料
     private Dictionary<string, List<string>> classesByYear = new Dictionary<string, List<string>>();
-
     // 學年和班級對應的 classCode（ID）
     private Dictionary<string, Dictionary<string, string>> classCodeByYearGrade = new Dictionary<string, Dictionary<string, string>>();
-
-    
     private Dictionary<string, string> studentData = new Dictionary<string, string>();
 
     [System.Serializable]
@@ -90,6 +80,7 @@ public class Login : MonoBehaviour
         public List<ClassData> classDataList;
     }
 
+    public MenuUIManager menuUIManager;
     public GameManager gameManager;
 
     void OnEnable()
@@ -114,6 +105,7 @@ public class Login : MonoBehaviour
         studentDropdown.onValueChanged.AddListener(delegate {
             StudentDropdownValueChanged(studentDropdown);
         });
+        login_btn.onClick.AddListener(LoginButton);
     }
     #region City
     // 獲取城市資料的協程// 先獲取所有 sheet 名稱
@@ -507,15 +499,10 @@ public class Login : MonoBehaviour
     #region Student
     IEnumerator showStudentsData()
     {
-        // Test data
-        string folderName = "173510";
-        string fileName = "173510_0001" + "_Student";
-        string classDataID = "173510_0001";
-
-        // Test data
-        // string folderName = SchoolDataID;
-        // string fileName = ClassID + "_Student";
-        // string classDataID = ClassID;
+        string folderName = SchoolDataID;
+        string fileName = ClassID + "_Student";
+        string classDataID = ClassID;
+        Debug.Log("檢查" + folderName);
 
         // Form to send to Google Apps Script
         WWWForm form = new WWWForm();
@@ -574,12 +561,42 @@ public class Login : MonoBehaviour
 
     private void StudentDropdownValueChanged(Dropdown dropdown)
     {
-        string selectedStudentName = dropdown.options[dropdown.value].text;
+        selectedStudentName = dropdown.options[dropdown.value].text;
         selectedStudentID = studentData.FirstOrDefault(x => x.Value == selectedStudentName).Key;
 
         Debug.Log($"Selected Student: {selectedStudentName}, ID: {selectedStudentID}");
         
         Loading_sign.SetActive(false);
+    }
+    #endregion
+    
+    #region UploadDataToGameManager
+
+    void LoginButton()
+    {
+        Loading_sign.SetActive(true);
+        StartCoroutine(UploadDataAndLogin());
+    }
+
+    IEnumerator UploadDataAndLogin()
+    {
+        // 上傳資料到 GameManager
+        UploadDataToGameManager();
+
+        // 等待一帧，確保資料已經處理完成
+        yield return null;
+
+        // 執行登入操作
+        menuUIManager.Login();
+
+        // 隱藏 LoadingUI
+        Loading_sign.SetActive(false);
+    }
+
+    void UploadDataToGameManager()
+    {
+        // 在這裡調用 GameManager 的 SetPlayerData 方法來上傳資料
+        GameManager.Instance.SetPlayerData(SchoolDataID, ClassID, selectedStudentID, selectedStudentName);
     }
     #endregion
 }
