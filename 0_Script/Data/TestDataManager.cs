@@ -32,19 +32,17 @@ public class TestDataManager : MonoBehaviour
 
     private void GetData()
     {
-        //資料查詢暫定
-        schoolId = "173510";
-        classId = "173510_0001";
-        getUId = 1;   
+        // schoolId = "173510";
+        // classId = "173510_0001";
         // studentId = "a1110831001";
+        // getUId = 1;   
+        
+        //資料查詢暫定
+        schoolId = gameManager.GetSchID();  
+        classId = gameManager.GetClass();  
+        getUId = gameManager.GetUid();   
         studentId = gameManager.GetPlayerID();
-
-        //暫定
-        // getSId = 1;
-        // startTime = "2024/6/23 7:22:23";
-        // completionTime = "2024/6/26 7:22:23";
-        // answer = "物理";
-
+        
         folderName = schoolId;
         fileName = classId + "_Test";
         sheetId = classId + "_" + getUId;

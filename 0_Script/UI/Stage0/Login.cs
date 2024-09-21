@@ -219,7 +219,7 @@ public class Login : MonoBehaviour
         // 根據選中的城市名稱找到對應的代號
         string key = cityData.FirstOrDefault(x => x.Value == selectedCity).Key;
         // 顯示選中的城市及其代號
-        Debug.Log($"選擇的城市: {selectedCity}, 代號: {key}");
+        // Debug.Log($"選擇的城市: {selectedCity}, 代號: {key}");
         CityDataID = key;
         CityData = selectedCity;
         StartCoroutine(GetAreaData());
@@ -290,7 +290,7 @@ public class Login : MonoBehaviour
         Loading_sign.SetActive(true);
         string selectedArea = dropdown.options[dropdown.value].text;
         string key = areaData.FirstOrDefault(x => x.Value == selectedArea).Key;  
-        Debug.Log($"選擇的區域: {selectedArea}, 代號: {key}");
+        // Debug.Log($"選擇的區域: {selectedArea}, 代號: {key}");
         AreaDataID = key;
         AreaData = selectedArea;
         StartCoroutine(GetSchoolData());
@@ -344,7 +344,7 @@ public class Login : MonoBehaviour
         Loading_sign.SetActive(true);
         string selectedSchool = dropdown.options[dropdown.value].text;
         string key = schoolData.FirstOrDefault(x => x.Value == selectedSchool).Key;  // 修正代碼
-        Debug.Log($"選擇的學校: {selectedSchool}, 代號: {key}");
+        // Debug.Log($"選擇的學校: {selectedSchool}, 代號: {key}");
         SchoolDataID = key;
         SchoolData = selectedSchool;
         
@@ -358,8 +358,8 @@ public class Login : MonoBehaviour
         API_URL = "https://script.google.com/macros/s/AKfycbw24_cKIaIOlRuosTJPcJueQVJumqXC1pWyNpGK-ekBBIUE8Df2O1HgYysR_LkTUmZj/exec";
         WWWForm form = new WWWForm();
         form.AddField("method", "findSchoolClass");
-        // form.AddField("schoolID", SchoolDataID);
-        form.AddField("schoolID", "173510");
+        form.AddField("schoolID", SchoolDataID);
+        // form.AddField("schoolID", "173510");
 
         using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
         {
@@ -451,7 +451,7 @@ public class Login : MonoBehaviour
     private void YearDropdownValueChanged(Dropdown dropdown)
     {
         string selectedYear = dropdown.options[dropdown.value].text.Split(' ')[0]; // 提取學年
-        Debug.Log($"選擇的學年: {selectedYear}");
+        // Debug.Log($"選擇的學年: {selectedYear}");
 
         // 更新 classDrop 選項
         if (classesByYear.ContainsKey(selectedYear))
@@ -479,18 +479,14 @@ public class Login : MonoBehaviour
         string selectedYear = yearDrop.options[yearDrop.value].text.Split(' ')[0]; // 提取學年
         string selectedClass = dropdown.options[dropdown.value].text; // 選中的班級（格式為 "幾年 幾班"）
 
-        Debug.Log($"選擇的班級: {selectedClass} in year {selectedYear}");
+        // Debug.Log($"選擇的班級: {selectedClass} in year {selectedYear}");
 
         // 找到對應的 ClassID 或 ID
         if (classCodeByYearGrade.ContainsKey(selectedYear) && classCodeByYearGrade[selectedYear].ContainsKey(selectedClass))
         {
             ClassID = classCodeByYearGrade[selectedYear][selectedClass];
-            Debug.Log($"對應的班級代號 (Class ID): {ClassID}");
+            // Debug.Log($"對應的班級代號 (Class ID): {ClassID}");
             // 在這裡執行後續邏輯，例如根據選中的班級 ID 進行操作
-        }
-        else
-        {
-            Debug.LogError("無法找到對應的班級代號");
         }
         StartCoroutine(showStudentsData());
     }
@@ -502,7 +498,7 @@ public class Login : MonoBehaviour
         string folderName = SchoolDataID;
         string fileName = ClassID + "_Student";
         string classDataID = ClassID;
-        Debug.Log("檢查" + folderName);
+        // Debug.Log("檢查" + folderName);
 
         // Form to send to Google Apps Script
         WWWForm form = new WWWForm();
@@ -524,7 +520,7 @@ public class Login : MonoBehaviour
             else
             {
                 string responseText = www.downloadHandler.text;
-                Debug.Log("Received data: " + responseText);
+                // Debug.Log("Received data: " + responseText);
 
                 // Parse the JSON into the dictionary
                 studentData = StudentParseJsonToDictionary(responseText);
@@ -557,6 +553,7 @@ public class Login : MonoBehaviour
         List<string> studentNames = students.Values.ToList();
         studentDropdown.AddOptions(studentNames);
         Loading_sign.SetActive(false);
+        StudentDropdownValueChanged(studentDropdown);
     }
 
     private void StudentDropdownValueChanged(Dropdown dropdown)
@@ -564,7 +561,7 @@ public class Login : MonoBehaviour
         selectedStudentName = dropdown.options[dropdown.value].text;
         selectedStudentID = studentData.FirstOrDefault(x => x.Value == selectedStudentName).Key;
 
-        Debug.Log($"Selected Student: {selectedStudentName}, ID: {selectedStudentID}");
+        // Debug.Log($"Selected Student: {selectedStudentName}, ID: {selectedStudentID}");
         
         Loading_sign.SetActive(false);
     }

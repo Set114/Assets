@@ -242,6 +242,9 @@ public class LogInSystem : MonoBehaviour
 
     void UploadDataToGameManager()
     {
-        GameManager.Instance.SetPlayerData(schoolData, classData, studentIDData, studentNameData);
+        
+        string schoolId = "173510";
+        string classId = "173510_0001";
+        GameManager.Instance.SetPlayerData(schoolId, classId, studentIDData, studentNameData);
     }
 }

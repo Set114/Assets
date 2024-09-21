@@ -30,19 +30,21 @@ public class LearnDataManager : MonoBehaviour
 
     private void GetData()
     {
-        //資料查詢暫定
-        schoolId = "173510";
-        classId = "173510_0001";
-        getUId = 1;   
+        //資料查詢測試
+        // schoolId = "173510";
+        // classId = "173510_0001";
         // studentId = "a1110831001";
+        // getUId = 1;   
+        
+        schoolId = gameManager.GetSchID();  
+        classId = gameManager.GetClass();  
+        getUId = gameManager.GetUid();   
         studentId = gameManager.GetPlayerID();
-
-
-        //暫定
-        // getSId = 1;
-        // startTime = "2024/6/23 7:22:23";
-        // completionTime = "2024/6/26 7:22:23";
-        // answer = 1;
+        
+        // Debug.Log("schoolId = " + schoolId);
+        // Debug.Log("classId = " + classId);
+        // Debug.Log("getUId = " + getUId);
+        // Debug.Log("studentId = " + studentId);
 
         folderName = schoolId;
         fileName = classId + "_Learn";
@@ -62,7 +64,7 @@ public class LearnDataManager : MonoBehaviour
     public void StartLevel()
     {
         startTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-        //Debug.Log("Start Times: " + startTime);
+        Debug.Log("Start Times: " + startTime);
     }
 
     // 紀錄關卡結束時間
@@ -120,7 +122,7 @@ public class LearnDataManager : MonoBehaviour
             }
             else
             {
-                // Debug.Log("獲取到的檔案連結: " + www.downloadHandler.text);
+                Debug.Log("獲取到的檔案連結: " + www.downloadHandler.text);
             }
         }
     }
@@ -128,7 +130,7 @@ public class LearnDataManager : MonoBehaviour
     {
         // Debug.LogWarning("開始時間或完成時間為空，無法上傳資料。");
     }
-    InitializeUploadObject();
+    // InitializeUploadObject();
     }
 
     private void InitializeUploadObject()
