@@ -119,12 +119,7 @@ public class TestDataManager : MonoBehaviour
             form.AddField("sTime", startTime);
             form.AddField("eTime", completionTime);
             form.AddField("getAnswer", answer);
-
-            // Debug.Log("sTime"+startTime);
-            // Debug.Log("eTime"+completionTime);
-            // form.AddField("getAnswer", "物理");
             form.AddField("score", score);
-            // Debug.Log("start_test");
             using (UnityWebRequest www = UnityWebRequest.Post("https://script.google.com/macros/s/AKfycbwGIfyZiYL3R5GwozV8707p2DhAUnr4V81Cvl0lfrMy4iwOZzUn925vhxcXgLojrgkNmw/exec", form))
             {
                 yield return www.SendWebRequest();

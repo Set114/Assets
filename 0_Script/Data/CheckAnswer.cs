@@ -5,6 +5,7 @@ using UnityEngine;
 public class CheckAnswer : MonoBehaviour
 {
     public TestDataManager testDataManager;
+
     public void CorrectAnswerData(int Index)
     {
         string answerData = "";
@@ -29,8 +30,6 @@ public class CheckAnswer : MonoBehaviour
         }
         testDataManager.Getanswer(answerData);
         testDataManager.Getscore(score);
-        // lvl1TestGM.SetScore(Index,answer);
-        // lvl1TestGM.GetAnswer(Index,answerData);
 
     }
 
@@ -50,9 +49,22 @@ public class CheckAnswer : MonoBehaviour
 
         testDataManager.Getanswer(answerData);
         testDataManager.Getscore(0);
-        // lvl1TestGM.GetAnswer(Index,answerData);
-        // lvl1TestGM.SetScore(Index,0);
     }
 
+    public void Stage5ScoreCount(float Index)
+    {
+        int score = 100;
+        
+        if (Index > 18)
+        {
+            // 計算超過的秒數，每多 2 秒扣 2 分
+            float extraSeconds = Index - 18;
+            int deduction = Mathf.FloorToInt(extraSeconds / 2) * 2;
+            score -= deduction;
+        }
 
+        score = Mathf.Max(score, 0);
+        // Debug.Log("分數: " + score);
+        testDataManager.Getscore(score);
+    }
 }

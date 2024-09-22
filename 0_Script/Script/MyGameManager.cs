@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MyGameManager : MonoBehaviour
 {
@@ -9,14 +11,20 @@ public class MyGameManager : MonoBehaviour
 
     [Header("已配對的卡牌數量")]
     public int matchedCardsCount = 0;
+    public TMP_Text TimerCount;
 
     public GameObject Canvas;
     public Timer Timer;
+    public CheckAnswer checkAnswer;
     public ControllerHaptics hapticsController;
+    public LevelEndSequence levelEndSequence;
+    public TestDataManager testDataManager;
 
     private bool a1 = false;
     public void AddCardInCardComparison(Card card)
     {
+        testDataManager.StartLevel();
+        testDataManager.GetsId(0);
         cardComparison.Add(card);
     }
 
@@ -88,10 +96,33 @@ public class MyGameManager : MonoBehaviour
         }
         ClearCardComparison();
     }
-
-    void ShowEndCanvas()
+    
+    //結束
+    // void ShowEndCanvas()
+    // {
+    //     Canvas.SetActive(true);
+    //     Timer.isCounting = false;
+    //     checkAnswer.Stage5ScoreCount(TimerCount.text);
+    //     testDataManager.Getanswer(TimerCount.text.ToString());
+    //     levelEndSequence.EndLevel(true, false, 2f, 0f, 5f, 0f,"1");
+    // }
+    public void ShowEndCanvas()
     {
         Canvas.SetActive(true);
         Timer.isCounting = false;
+        StartCoroutine(ExecuteWithDelay());
     }
+
+    private IEnumerator ExecuteWithDelay()
+    {
+        checkAnswer.Stage5ScoreCount(float.Parse(TimerCount.text));
+        testDataManager.Getanswer(TimerCount.text.ToString());
+
+        // 確保兩者執行完成後再執行 EndLevel
+        yield return null;
+        
+        levelEndSequence.EndLevel(true, false, 2f, 0f, 5f, 0f,"1");
+    }
+
+
 }

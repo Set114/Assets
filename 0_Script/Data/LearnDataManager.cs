@@ -64,7 +64,7 @@ public class LearnDataManager : MonoBehaviour
     public void StartLevel()
     {
         startTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-        Debug.Log("Start Times: " + startTime);
+        // Debug.Log("Start Times: " + startTime);
     }
 
     // 紀錄關卡結束時間

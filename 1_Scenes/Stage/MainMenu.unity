@@ -8318,7 +8318,6 @@ GameObject:
   - component: {fileID: 940713758}
   - component: {fileID: 940713759}
   - component: {fileID: 940713760}
-  - component: {fileID: 940713761}
   m_Layer: 5
   m_Name: StartMenu
   m_TagString: Untagged
@@ -8391,19 +8390,6 @@ MonoBehaviour:
   studentDropdown: {fileID: 533968196}
   menuUIManager: {fileID: 1566999637}
   gameManager: {fileID: 0}
---- !u!114 &940713761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940713757}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de61c34bfbc73b44f815d2028e524618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  studentDropdown: {fileID: 533968196}
 --- !u!1 &952872567
 GameObject:
   m_ObjectHideFlags: 0

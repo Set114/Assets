@@ -2986,6 +2986,7 @@ GameObject:
   - component: {fileID: 155775058}
   - component: {fileID: 155775056}
   - component: {fileID: 155775055}
+  - component: {fileID: 155775059}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -3034,6 +3035,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &155775059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155775054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc49a51f8ade564da22b9d3e6d23b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testDataManager: {fileID: 155775055}
 --- !u!1 &157795693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1535349196944292822, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
@@ -14000,7 +14014,7 @@ RectTransform:
   m_GameObject: {fileID: 224642093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.84108, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 111330537}
@@ -14008,7 +14022,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444092, y: 2.8}
+  m_AnchoredPosition: {x: 0.000014424, y: -0.1}
   m_SizeDelta: {x: 100, y: 23.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &224642095
@@ -27071,9 +27085,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardComparison: []
   matchedCardsCount: 0
+  TimerCount: {fileID: 1995013702}
   Canvas: {fileID: 111330536}
   Timer: {fileID: 811870099}
+  checkAnswer: {fileID: 155775059}
   hapticsController: {fileID: 811870101}
+  levelEndSequence: {fileID: 586626}
+  testDataManager: {fileID: 155775055}
 --- !u!114 &811870101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34457,7 +34475,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -2.667, y: 1.344}
+  m_AnchoredPosition: {x: -2.782, y: 1.344}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116209802
@@ -39896,7 +39914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1466597676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43226,7 +43244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 51.7, y: 38.4}
+  m_AnchoredPosition: {x: 59.3, y: 38.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1677887023
@@ -48540,7 +48558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000029802, y: -30.9}
+  m_AnchoredPosition: {x: 0.0000029802, y: -38.1}
   m_SizeDelta: {x: 30.27, y: 18.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1899121009
@@ -48587,30 +48605,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1466597675}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 799366539}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 111330536}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
