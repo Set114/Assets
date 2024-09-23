@@ -69,7 +69,7 @@ public class AtomicDetection : MonoBehaviour
     {
         currentLevel = GetCurrentLevel();
 
-        Debug.Log($"Trigger Entered by: {other.gameObject.name}");
+        // Debug.Log($"Trigger Entered by: {other.gameObject.name}");
 
         foreach (var key in detectedSpheres.Keys)
         {
@@ -78,7 +78,7 @@ public class AtomicDetection : MonoBehaviour
                 detectedSpheres[key].Add(other.gameObject);
                 sphereCounts[key]++;
                 allCount++;
-                Debug.Log($"Added {other.gameObject.name} to detectedSpheres[{key}]");
+                // Debug.Log($"Added {other.gameObject.name} to detectedSpheres[{key}]");
 
                 // Update the specific counters
                 if (key == "N(sphere)")
@@ -95,7 +95,7 @@ public class AtomicDetection : MonoBehaviour
             }
         }
 
-        Debug.Log($"N: {sphereCounts["N(sphere)"]} 、 O: {sphereCounts["O(sphere)"]} 、 C: {sphereCounts["C(sphere)"]} 、H: {sphereCounts["H(sphere)"]} 、Fe: {sphereCounts["Fe(sphere)"]}");
+        // Debug.Log($"N: {sphereCounts["N(sphere)"]} 、 O: {sphereCounts["O(sphere)"]} 、 C: {sphereCounts["C(sphere)"]} 、H: {sphereCounts["H(sphere)"]} 、Fe: {sphereCounts["Fe(sphere)"]}");
 
         // Update TextMeshPro based on the current level
         UpdateTextMeshPro();
@@ -109,7 +109,7 @@ public class AtomicDetection : MonoBehaviour
         {
             if (textMesh != null)
             {
-                Debug.Log($"Updating TextMeshPro for {textMesh.name}");
+                // Debug.Log($"Updating TextMeshPro for {textMesh.name}");
                 if (textMesh.name.Contains("n2"))
                     textMesh.text = sphereCounts["N(sphere)"].ToString();
                 else if (textMesh.name.Contains("o2"))
@@ -127,7 +127,7 @@ public class AtomicDetection : MonoBehaviour
         if (allCount == GetRequiredBallCountForCurrentLevel())
         {
             HandleSphereDetection();
-            Debug.Log("");
+            // Debug.Log("");
         }
     }
 
@@ -175,7 +175,7 @@ public class AtomicDetection : MonoBehaviour
     {
         if (allCount == GetRequiredBallCountForCurrentLevel())
         {
-            Debug.Log($"Checking conditions: N2: {n2Count}, O2: {o2Count}, C2: {c2Count}, H2: {h2Count}, Fe2: {fe2Count}, Level: {currentLevel}");
+            // Debug.Log($"Checking conditions: N2: {n2Count}, O2: {o2Count}, C2: {c2Count}, H2: {h2Count}, Fe2: {fe2Count}, Level: {currentLevel}");
 
             if (currentLevel == "part0")
             {
@@ -218,7 +218,7 @@ public class AtomicDetection : MonoBehaviour
         {
             if (obj.name.StartsWith("part") && obj.activeInHierarchy)
             {
-                Debug.Log($"Current Level: {obj.name}");
+                // Debug.Log($"Current Level: {obj.name}");
                 return obj.name;
             }
         }
@@ -270,7 +270,7 @@ public class AtomicDetection : MonoBehaviour
             if (sphere != null)
             {
                 sphere.SetActive(false);
-                Debug.Log($"Deactivated sphere: {sphere.name}");
+                // Debug.Log($"Deactivated sphere: {sphere.name}");
             }
         }
     }

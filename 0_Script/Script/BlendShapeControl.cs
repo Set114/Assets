@@ -125,12 +125,11 @@ public class BlendShapeControl : MonoBehaviour
         question2_btn.gameObject.SetActive(false);
         Q2_UI.SetActive(true);
     }
+
     public void CloseQ()
     {
         if(count == 0)
         {
-            // lvl1TestGM.CompleteLevel(0);
-            // lvl1TestGM.StartLevel(1);
             testDataManager.CompleteLevel();
             testDataManager.EndLevel();
 
@@ -138,18 +137,24 @@ public class BlendShapeControl : MonoBehaviour
         }
         else if(count == 1)
         {
-            // lvl1TestGM.CompleteLevel(1);
-            // lvl1TestGM.LevelsUpload(() => 
-            // {
-            //     item.SetActive(false);
-            //     checkImage.SwitchImage(7);
-            //     EndUI.SetActive(true);
-            // });
-            levelEndSequence.EndLevel(true, false, 2f, 0f, 3f, 0f,"1");
-            TestShowUI.gameObject.SetActive(true);      
-
-            count++;
+            testDataManager.CompleteLevel();
+            StartCoroutine(WaitForEndLevelAndShowUI());
         }
+    }
+
+    private IEnumerator WaitForEndLevelAndShowUI()
+    {
+        // 執行結束過程
+        levelEndSequence.EndLevel(true, false, 2f, 0f, 3f, 0f, "1");
+
+        // 等待結束動畫的時間，例如這裡是 3 秒
+        yield return new WaitForSeconds(3f);
+
+        // 在動畫結束後再顯示 TestShowUI
+        TestShowUI.gameObject.SetActive(true);      
+
+        // 增加計數
+        count++;
     }
 
     private IEnumerator WaitAndStartNextLevel1()

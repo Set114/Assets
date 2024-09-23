@@ -26589,7 +26589,7 @@ MonoBehaviour:
   - {fileID: 1328344657}
   T213UI: {fileID: 1202469607}
   item: {fileID: 1677887023}
-  playButton: {fileID: 0}
+  playButton: {fileID: 932564923}
 --- !u!1 &544937630
 GameObject:
   m_ObjectHideFlags: 0
@@ -55648,7 +55648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1466597676
 MonoBehaviour:
   m_ObjectHideFlags: 0

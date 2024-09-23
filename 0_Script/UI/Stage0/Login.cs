@@ -15,7 +15,6 @@ public class Login : MonoBehaviour
     private string AreaDataID = "";
     private string SchoolDataID = "";
     private string ClassID = "";
-    private string TeacherDataID = "";
     private string selectedStudentID = "";
     private string selectedStudentName = "";
     

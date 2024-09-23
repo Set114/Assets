@@ -99,7 +99,7 @@ public class IceBlockCollision : MonoBehaviour
         else if (count == 2)
         {
             levelEndSequence.EndLevel(false, false, 2f, 0f, 5f, 0f,"1");
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(6f);
             iceBlockCollisionStage1UI.TestUIShow();
         }
         count++;

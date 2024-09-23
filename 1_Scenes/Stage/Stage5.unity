@@ -473,7 +473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9499881
 Transform:
   m_ObjectHideFlags: 0
@@ -22748,7 +22748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &599930641
 Transform:
   m_ObjectHideFlags: 0
@@ -25001,7 +25001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1103935062009469936, guid: 51fae8445e7907f44a08b78f89647ffb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1110507504321373224, guid: 51fae8445e7907f44a08b78f89647ffb, type: 3}
       propertyPath: m_Layer
@@ -35916,6 +35916,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beaker_100mL_WithLiquid
       objectReference: {fileID: 0}
+    - target: {fileID: 2866325348300555821, guid: 3a27e022fff4fe84abbc7c017fd870fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2866325348300555823, guid: 3a27e022fff4fe84abbc7c017fd870fe, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -40669,6 +40673,10 @@ PrefabInstance:
     - target: {fileID: 7729756938438358992, guid: 9396d9b662ab3bf44a56a6a575a516d8, type: 3}
       propertyPath: m_Name
       value: Beaker_500mL_WithLiquid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7729756938438358992, guid: 9396d9b662ab3bf44a56a6a575a516d8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7729756938438358994, guid: 9396d9b662ab3bf44a56a6a575a516d8, type: 3}
       propertyPath: m_Layer
@@ -47068,6 +47076,10 @@ PrefabInstance:
     - target: {fileID: 1881684693497119309, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
       propertyPath: m_Name
       value: alcohol lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881684693497119309, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
