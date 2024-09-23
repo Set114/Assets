@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IceBlockCollisionStage1UI : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class IceBlockCollisionStage1UI : MonoBehaviour
     public GameObject T213UI;
     [Header("Item")]
     public GameObject item;
+
+    [Header("Button")]
+    public Button playButton;
+
 
     void Start()
     {
@@ -51,6 +56,7 @@ public class IceBlockCollisionStage1UI : MonoBehaviour
 
         TestUI.SetActive(true);
         T213UI.SetActive(true);
+        playButton.gameObject.SetActive(false);
     }
     public void TestUIHide()
     {

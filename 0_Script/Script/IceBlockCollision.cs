@@ -15,8 +15,6 @@ public class IceBlockCollision : MonoBehaviour
     [Header("Mark")]
     public GameObject q1questionMark;
     public GameObject q2questionMark;
-    [Header("UI")]
-    public GameObject T213UI;
     [Header("Button")]
     public Button q1question_btn;
     public Button q2question_btn;
