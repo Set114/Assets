@@ -40,7 +40,7 @@ public class AnimatorStartStage1 : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         
-        levelEndSequence.EndLevel(false,true,3f,0f,9f,1f,"1");
+        levelEndSequence.EndLevel(false,true, 1f, 8f, 1f, "1", () => { });
     }
     
 }

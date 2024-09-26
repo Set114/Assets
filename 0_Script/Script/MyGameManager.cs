@@ -120,8 +120,8 @@ public class MyGameManager : MonoBehaviour
 
         // 確保兩者執行完成後再執行 EndLevel
         yield return null;
-        
-        levelEndSequence.EndLevel(true, false, 2f, 0f, 5f, 0f,"1");
+    
+        levelEndSequence.EndLevel(true,false, 1f, 4f, 1f, "1", () => { });
     }
 
 

@@ -4,9 +4,7 @@ using UnityEngine;
 public class LevelEndSequence : MonoBehaviour
 {
     public CameraController cameraController; // 相機控制器
-    //public ScreenShow screenShow; // 屏幕顯示控制
     public SwitchUI switchUI; // 關卡 UI 管理器
-    //public Lvl1tutorialGM lvl1tutorialGM; // 關卡教學管理
     public CheckImage checkImage; // 圖像檢查
     public ELFStatus elfStatus; // ELF 狀態控制
 
@@ -24,6 +22,8 @@ public class LevelEndSequence : MonoBehaviour
     [Header("EndUI")]
     [SerializeField] GameObject learnEndUI;
     [SerializeField] GameObject testEndUI;
+    [Header("LoadingSign")]
+    [SerializeField] GameObject loading_sign;
 
     [Header("UI")]
     [SerializeField] GameObject learnUI;
@@ -39,34 +39,33 @@ public class LevelEndSequence : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+        loading_sign.SetActive(false);
     }
 
-    public void EndLevel(bool showEndUIBool,bool haveAniBool,float showELFDelayTime,float cameraZoomDelayTime,float levelChangeDelayTime,float nextUIShowDelayTime,string answerData)
+    public void EndLevel(bool showEndUIBool,bool haveAniBool,float showELFDelayTime,float levelChangeDelayTime,float nextUIShowDelayTime,string answerData, System.Action callback = null)
     {
         showEndUI = showEndUIBool;
         haveAni = haveAniBool;
-        showELFDelay = showELFDelayTime;
-        cameraZoomDelay = cameraZoomDelayTime;
-        levelChangeDelay = levelChangeDelayTime;
-        nextUIShowDelay = nextUIShowDelayTime;
+
+        showELFDelay = showELFDelayTime;// 延遲小精靈的顯示時間
+        levelChangeDelay = levelChangeDelayTime;// 小精靈的說話時間
+        nextUIShowDelay = nextUIShowDelayTime;// 到下一關前的緩衝時間
+        answer = answerData;// 答案
+
         levelCount = switchUI.GetLevelCount();
-        answer = answerData;
+
         playSpeechAudio.SetCurrentLevel(levelCount);
-        StartCoroutine(ShowELFAndThenZoomIn());
-        // Debug.Log(levelCount +　"endstart");
+        StartCoroutine(ShowELFAndThenZoomIn(callback)); // 傳入 callback
     }
 
     // 先顯示 ELF，再進行鏡頭縮放
-    IEnumerator ShowELFAndThenZoomIn()
+    IEnumerator ShowELFAndThenZoomIn(System.Action callback)
     {
         if (haveAni == true){
-            //Debug.Log(levelCount +　"_true");
             yield return ShowELFWithDelay(showELFDelay); // 等待指定時間後顯示 ELF
-            yield return new WaitForSeconds(cameraZoomDelay); // 等待縮放鏡頭的延遲時間
-            //cameraController.ZoomIn(); // 縮放鏡頭            
         }
         
-        StartCoroutine(DelayedLevelChange()); // 開始延遲關卡變更
+        StartCoroutine(DelayedLevelChange(callback)); // 開始延遲關卡變更，傳入 callback
     }
 
     // 延遲顯示 ELF
@@ -77,27 +76,25 @@ public class LevelEndSequence : MonoBehaviour
     }
 
     // 延遲關卡變更
-    IEnumerator DelayedLevelChange()
+    IEnumerator DelayedLevelChange(System.Action callback)
     {
         yield return new WaitForSeconds(levelChangeDelay);
         elfStatus.HideELF(); // 隱藏 ELF
         chapterMode = gameManager.GetChapterMode();
+        loading_sign.SetActive(true);
 
         if (chapterMode == 0)
         {
-            learnDataManager.EndLevelWithCallback(answer, () => StartCoroutine(ShowNextUIAfterDelay(nextUIShowDelay)));
+            learnDataManager.EndLevelWithCallback(answer, () => StartCoroutine(ShowNextUIAfterDelay(nextUIShowDelay, callback)));
         }
         else if (chapterMode == 1)
         {
-            testDataManager.EndLevelWithCallback(() => StartCoroutine(ShowNextUIAfterDelay(nextUIShowDelay)));
+            testDataManager.EndLevelWithCallback(() => StartCoroutine(ShowNextUIAfterDelay(nextUIShowDelay, callback)));
         }
-        //使用回調函數在關卡結束後執行顯示下一個 UI 的操作
-        
-        //StartCoroutine(ShowNextUIAfterDelay(nextUIShowDelay));
     }
 
     // 延遲顯示下一個 UI
-    IEnumerator ShowNextUIAfterDelay(float delay)
+    IEnumerator ShowNextUIAfterDelay(float delay, System.Action callback)
     {
         chapterMode = gameManager.GetChapterMode();
         yield return new WaitForSeconds(delay); // 等待指定時間
@@ -121,9 +118,9 @@ public class LevelEndSequence : MonoBehaviour
                 testEndUI.SetActive(true);
             }
         }
+        loading_sign.SetActive(false);
+        
+        // 執行 callback 以回報完成
+        callback?.Invoke();
     }
-
-
-
-
 }

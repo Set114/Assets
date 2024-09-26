@@ -8,6 +8,7 @@ public class DataWrite : MonoBehaviour
     
     public void DataWriting()
     {
-        levelEndSequence.EndLevel(true,false,2f,0f,6f,1f,"1");
+        levelEndSequence.EndLevel(true,false, 1f, 6f, 1f, "1", () => { });
+        
     }
 }

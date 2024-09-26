@@ -18,12 +18,12 @@ public class WaterScaleCube : MonoBehaviour
     private float targetScaleY = 0.5f;
     private float scaleSpeed = 0.3f; 
 
-    void Start()
+
+    void OnEnable()
     {
         previousCoverPosition = cover.transform.position;
         UpdateScaleFactor(scale1);
-        hint.SetActive(true);
-        H2ONo.SetActive(false);
+        H2ONo.SetActive(false);            
     }
 
     private void Update()

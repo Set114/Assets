@@ -24,6 +24,7 @@ public class Test_ItemLevel : MonoBehaviour
 
     void End()
     {
-        levelEndSequence.EndLevel(EndBool, false, 2f, 0f, 5f, 0f, AnswerInt);
+        // levelEndSequence.EndLevel(EndBool, false, 2f, 0f, 5f, 0f, AnswerInt);
+        levelEndSequence.EndLevel(EndBool,false, 1f, 4f, 1f, AnswerInt, () => { });
     }
 }

@@ -144,25 +144,17 @@ public class BlendShapeControl : MonoBehaviour
 
     private IEnumerator WaitForEndLevelAndShowUI()
     {
-        // 執行結束過程
-        levelEndSequence.EndLevel(true, false, 2f, 0f, 3f, 0f, "1");
-
-        // 等待結束動畫的時間，例如這裡是 3 秒
-        yield return new WaitForSeconds(3f);
-
-        // 在動畫結束後再顯示 TestShowUI
-        TestShowUI.gameObject.SetActive(true);      
-
-        // 增加計數
+        yield return null; 
+        levelEndSequence.EndLevel(true, false, 1f, 2f, 1f, "1", () => {
+            TestShowUI.gameObject.SetActive(true);
+        });
         count++;
     }
 
     private IEnumerator WaitAndStartNextLevel1()
     {
-        // 等待 3 秒
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
-        // 關卡完成後，開始新的關卡並初始化相關數據
         testDataManager.StartLevel();
         testDataManager.GetsId(4);
         Question2_mark();

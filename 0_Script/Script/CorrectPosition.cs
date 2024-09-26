@@ -101,11 +101,11 @@ public class CorrectPosition : MonoBehaviour
     {   
         if (flag == true)
         {
-            levelEndSequence.EndLevel(false,false,2f,0f,6f,1f,"0");
+            levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "0", () => { });
         }
         else if (flag == false)
         {
-            levelEndSequence.EndLevel(false,false,2f,0f,6f,1f,"1");
+            levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "1", () => { });
         }
         
     }

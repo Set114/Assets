@@ -57,7 +57,7 @@ public class ShowBubbleChangeColor : MonoBehaviour
         // 確保時間結束後顏色正好是 endColor
         mat.SetColor("_Albedo", endColor);
 
-        levelEndSequence.EndLevel(false,true,2f,0f,6f,1f,"1");
+        levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
     }
 
 }

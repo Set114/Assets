@@ -86,10 +86,9 @@ public class HammerIronInteraction : MonoBehaviour
                 countImg.sprite = countSprites[2];
             }
 
-            // 如果 currentIronIndex == 3，调用 CameraController 的 ZoomIn 方法
             if (currentIronIndex == 3)
             {
-                levelEndSequence.EndLevel(false,true,2f,0f,6f,1f,"1");
+                levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
             }
         }
 

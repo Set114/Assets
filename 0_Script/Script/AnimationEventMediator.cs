@@ -7,6 +7,6 @@ public class AnimationEventMediator : MonoBehaviour
     
     public void OnAnimationEnd()
     {
-        levelEndSequence.EndLevel(true,true,2f,0f,21f,0f,"1");
+        levelEndSequence.EndLevel(true,true, 2f, 20f, 1f, "1", () => { });
     }
 }

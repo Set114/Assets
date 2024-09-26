@@ -49,8 +49,8 @@ public class AnimationEnable : MonoBehaviour
     
     private void End()
     {
-        levelEndSequence.EndLevel(false,true,2f,0f,8f,0f,"1");
-        StartCoroutine(HideScreenActive(5f));
+        levelEndSequence.EndLevel(false,true, 1f, 9f, 1f, "1", () => { });
+        // StartCoroutine(HideScreenActive(5f));
     }
 
 
