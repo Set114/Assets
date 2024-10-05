@@ -13,22 +13,36 @@ public class GlucoseScaleCube : MonoBehaviour
     public TextMeshProUGUI parameterDisplayText;
     public Vector3 scale1 = new Vector3(0, 0.1f, 0);
     public Vector3 scale2 = new Vector3(0, 0.1f, 0);
+    public int levelindex;
+
+    public SwitchUI switchUI;
+    
+    
 
     private bool isMove = false;
     public bool a1 = false;
     public bool isParticleTriggered = false;
 
-    void Start()
+    void OnEnable()
     {
-        Button.onClick.AddListener(OnButtonClicked);
+        levelindex = switchUI.GetLevelCount();
+        Debug.Log("levelindex = " + levelindex);
+        if (levelindex == 2)
+        {
+            Button.onClick.AddListener(OnButtonClicked);
+        }
     }
 
     private void Update()
     {
-        if (isParticleTriggered && !isMove)
+        if (levelindex == 2)
         {
-            UpdateScaleFactor(new ScaleFactorParameters(scale1,true));
-            isMove = true;
+            if (isParticleTriggered && !isMove)
+            {
+                UpdateScaleFactor(new ScaleFactorParameters(scale1,true));
+                isMove = true;
+                Debug.Log("Update is true");
+            }
         }
     }
 
@@ -52,15 +66,18 @@ public class GlucoseScaleCube : MonoBehaviour
         scaleCubeScript.ScaleInOneDirection(parameters.scale, direction, parameterDisplayText);
         
 
+         Debug.Log("A2 = " + a1);
 
         if (parameters.showHint)
         {
             if (a1)
             {
+                Debug.Log("A2 is true");
                 StartCoroutine(ActivateHintWithDelay(4.5f, hint2));
             }
             else
             {
+                Debug.Log("A1 is true");
                 StartCoroutine(ActivateHintWithDelay(4.5f, hint1));
             }
         }
@@ -70,6 +87,7 @@ public class GlucoseScaleCube : MonoBehaviour
 
     private IEnumerator ActivateHintWithDelay(float delay, GameObject hint)
     {
+        Debug.Log("hint is true");
         yield return new WaitForSeconds(delay);
         hint.SetActive(true);
         a1 = true;

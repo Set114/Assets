@@ -14,17 +14,24 @@ public class DisplayText : MonoBehaviour
     public string displayText4 = "0%";
     public string displayText5 = "0%";
     public Vector3 scale = new Vector3(0, 0.1f, 0);
+    public int levelindex;
 
     private bool a1 = false;
     // private AnimationController animationController;
+    public SwitchUI switchUI;
 
 
-    void Start()
+    void OnEnable()
     {
-        if (text != null)
+        levelindex = switchUI.GetLevelCount();
+        if (levelindex == 2)
         {
-            text.text = displayText1;
+            if (text != null)
+            {
+                text.text = displayText1;
+            }
         }
+
         //Button.onClick.AddListener(OnButtonClicked);
 
         // animationController = FindObjectOfType<AnimationController>();
@@ -36,10 +43,13 @@ public class DisplayText : MonoBehaviour
 
     private void Update()
     {
-        if (glucoseScaleCubeScript.isParticleTriggered && !a1)
+        if (levelindex == 3)
         {
-            StartCoroutine(AnimateText(displayText2));
-            a1 = true;
+            if (glucoseScaleCubeScript.isParticleTriggered && !a1)
+            {
+                StartCoroutine(AnimateText(displayText2));
+                a1 = true;
+            }
         }
     }
 

@@ -11,6 +11,7 @@ public class WaterScaleCube : MonoBehaviour
     public GameObject H2ONo;
     public TextMeshProUGUI parameterDisplayText;
     public bool isMove = false;
+    public Vector3 scale0 = new Vector3(0, 0, 0);
     public Vector3 scale1 = new Vector3(0, 0.1f, 0);
     public Vector3 scale2 = new Vector3(0, 0.1f, 0);
 
@@ -18,28 +19,42 @@ public class WaterScaleCube : MonoBehaviour
     private float targetScaleY = 0.5f;
     private float scaleSpeed = 0.3f; 
 
+    public int levelindex;
+    public bool flag1 = false; 
+    public bool flag2 = false; 
+
+    public SwitchUI switchUI;
 
     void OnEnable()
     {
-        previousCoverPosition = cover.transform.position;
-        UpdateScaleFactor(scale1);
-        H2ONo.SetActive(false);            
+        levelindex = switchUI.GetLevelCount();
+        if (!flag1)
+        {
+            previousCoverPosition = cover.transform.position;
+            UpdateScaleFactor(scale1);
+            H2ONo.SetActive(false);  
+            flag1 = true;
+        }          
     }
 
     private void Update()
     {
-        if (Vector3.Distance(cover.transform.position, previousCoverPosition) > 0.001f && !isMove)
+        if (levelindex == 1 && !flag2)
         {
-            UpdateScaleFactor(scale2);
-            isMove = true;
-            h2o.SetActive(false);
-            H2ONo.SetActive(true);
-        }
+            if (Vector3.Distance(cover.transform.position, previousCoverPosition) > 0.001f && !isMove)
+            {
+                UpdateScaleFactor(scale2);
+                isMove = true;
+                h2o.SetActive(false);
+                H2ONo.SetActive(true);
+            }
 
-        if (isMove)
-        {
-            UpdateLiquidScale();
-        }
+            if (isMove)
+            {
+                UpdateLiquidScale();
+            }
+        }   
+
     }
 
     private void UpdateScaleFactor(Vector3 scale)

@@ -23,13 +23,14 @@ public class AnimationController : MonoBehaviour
     
     public LevelEndSequence levelEndSequence;
 
-    void Start()
+    void OnEnable()
     {
         animator = GetComponent<Animator>();
         Button.onClick.AddListener(OnButtonClicked);
         Button2.onClick.AddListener(OnButtonClicked2);
         Button3.onClick.AddListener(OnButtonClicked2);
         Button4.onClick.AddListener(OnButtonClicked2);
+        Debug.Log("start");
     }                   
 
     public void OnButtonClicked()
@@ -48,6 +49,7 @@ public class AnimationController : MonoBehaviour
     }    
     public void OnButtonClicked2()
     {
+        Debug.Log("OnButtonClicked2 start");
         StartCoroutine(AnimationMiddle2Routine());
     }
 
@@ -77,23 +79,23 @@ public class AnimationController : MonoBehaviour
     public void OnAnimationMiddle2()
     {       
         animator.speed = 0f;//動畫暫停
-        // Debug.Log("OnAnimationMiddle2");
+        Debug.Log("OnAnimationMiddle2");
     }
     public void OnAnimationMiddle3()
     {
         animator.speed = 0f;
-        // Debug.Log("OnAnimationMiddle3");
+        Debug.Log("OnAnimationMiddle3");
     }
 
     public void OnAnimationEnd()
     {
         animator.StopPlayback();
-        // Debug.Log("OnAnimationEnd");
+        Debug.Log("OnAnimationEnd");
     }
 
     public void ResumeAnimation()
     {
         animator.speed = 1f;
-        // Debug.Log("ResumeAnimation");
+        Debug.Log("ResumeAnimation");
     }
 }
