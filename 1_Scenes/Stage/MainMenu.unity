@@ -8318,13 +8318,14 @@ GameObject:
   - component: {fileID: 940713758}
   - component: {fileID: 940713759}
   - component: {fileID: 940713760}
+  - component: {fileID: 940713761}
   m_Layer: 5
   m_Name: StartMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &940713758
 Transform:
   m_ObjectHideFlags: 0
@@ -8353,7 +8354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940713757}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e90edf40189c6614eb6d6554a5ac5e15, type: 3}
   m_Name: 
@@ -8388,6 +8389,28 @@ MonoBehaviour:
   yearDrop: {fileID: 1721852868}
   classDrop: {fileID: 1951603933}
   studentDropdown: {fileID: 533968196}
+  menuUIManager: {fileID: 1566999637}
+  gameManager: {fileID: 0}
+--- !u!114 &940713761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940713757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a520b29b9d0985c49b0b350af2333339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadingUI: {fileID: 1755019014}
+  login_btn: {fileID: 306379982}
+  city_drop: {fileID: 603298575}
+  region_drop: {fileID: 107058612}
+  school_drop: {fileID: 1460757988}
+  yearDrop: {fileID: 1721852868}
+  classDrop: {fileID: 1951603933}
+  studentDrop: {fileID: 533968196}
   menuUIManager: {fileID: 1566999637}
   gameManager: {fileID: 0}
 --- !u!1 &952872567
@@ -14321,6 +14344,8 @@ MonoBehaviour:
   SettingUI: {fileID: 438137821}
   bgmSlider: {fileID: 1421385805}
   UIeffectSlider: {fileID: 808502143}
+  LoadingUI: {fileID: 1755019014}
+  TestButton: {fileID: 412913621}
   audioManager: {fileID: 75363299}
   gameManager: {fileID: 1894450897}
   chapterModeData: 0

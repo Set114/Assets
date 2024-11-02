@@ -20,7 +20,7 @@ public class C6H12O6_0624ShowController : MonoBehaviour
         }
         else if (levelindex == 3)
         {
-            animator.Play("C6H12O6", 0, 400f / 787f);  // 第402幀, 787 是動畫總幀數
+            animator.Play("C6H12O6", 0, 402f / 787f);  // 第402幀, 787 是動畫總幀數
         }
         else if (levelindex == 4)
         {

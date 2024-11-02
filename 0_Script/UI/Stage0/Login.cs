@@ -23,8 +23,6 @@ public class Login : MonoBehaviour
     private string AreaData;
     private string SchoolData;
 
-    // 學年資料
-    private List<ClassData> classDataList = new List<ClassData>();
 
     [Header("Loading")]
     public GameObject Loading_sign;
@@ -54,6 +52,13 @@ public class Login : MonoBehaviour
         public List<string> sheets;
     }
 
+    [System.Serializable]
+    public class ClassDataListWrapper
+    {
+        public List<ClassData> classDataList;
+    }
+    // 學年資料
+    private List<ClassData> classDataList = new List<ClassData>();
     // 用於存儲不重複的資料配對
     private Dictionary<string, string> cityData = new Dictionary<string, string>();
     private Dictionary<string, string> areaData = new Dictionary<string, string>();
@@ -73,11 +78,6 @@ public class Login : MonoBehaviour
         public string classCode;
     }
 
-    [System.Serializable]
-    public class ClassDataListWrapper
-    {
-        public List<ClassData> classDataList;
-    }
 
     public MenuUIManager menuUIManager;
     public GameManager gameManager;

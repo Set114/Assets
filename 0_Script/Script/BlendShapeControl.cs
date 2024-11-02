@@ -33,8 +33,8 @@ public class BlendShapeControl : MonoBehaviour
     [Header("Question_UI")]
     public GameObject Q1_UI;
     public GameObject Q2_UI;
-    [Header("End")]
-    public GameObject EndUI;
+    [Header("LoadingSign")]
+    [SerializeField] GameObject loading_sign;
     int count=0;
     //public Lvl1TestGM lvl1TestGM;
     public LevelEndSequence levelEndSequence;
@@ -130,10 +130,13 @@ public class BlendShapeControl : MonoBehaviour
     {
         if(count == 0)
         {
+            loading_sign.SetActive(true);
             testDataManager.CompleteLevel();
-            testDataManager.EndLevel();
+            testDataManager.EndLevelWithCallback(() => {StartCoroutine(WaitAndStartNextLevel1());
+                                                        loading_sign.SetActive(false); });
+            // testDataManager.EndLevel();
 
-            StartCoroutine(WaitAndStartNextLevel1());
+            
         }
         else if(count == 1)
         {

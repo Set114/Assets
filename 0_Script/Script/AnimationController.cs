@@ -22,6 +22,8 @@ public class AnimationController : MonoBehaviour
     public GlucoseScaleCube glucoseScaleCube2;
     
     public LevelEndSequence levelEndSequence;
+    
+    public Vector3 scale2 = new Vector3(0, 0.1f, 0);
 
     void OnEnable()
     {
@@ -46,16 +48,23 @@ public class AnimationController : MonoBehaviour
         yield return new WaitForSeconds(7f);
         ELF1_3_1.SetActive(false);
         yield return new WaitForSeconds(3f);
+        glucoseScaleCube1.OnButtonClicked();
     }    
     public void OnButtonClicked2()
     {
         Debug.Log("OnButtonClicked2 start");
         StartCoroutine(AnimationMiddle2Routine());
+        // Button2.gameObject.SetActive(false);
     }
 
     private IEnumerator AnimationMiddle2Routine()
     {
         ResumeAnimation();
+        if (levelIndex.text == "5-3")
+        {
+            glucoseScaleCube1.NotToClickAgain();
+            glucoseScaleCube2.NotToClickAgain();
+        }
         if (levelIndex.text == "5-5")
         {
             levelEndSequence.EndLevel(true,true, 1f, 7f, 1f, "1", () => { });

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System; 
 
 
 public class IceBlockCollision : MonoBehaviour
@@ -19,6 +20,8 @@ public class IceBlockCollision : MonoBehaviour
     public Button q1question_btn;
     public Button q2question_btn;
     public Button Close_btn;
+    [Header("LoadingSign")]
+    [SerializeField] GameObject loading_sign;
 
     public LevelEndSequence levelEndSequence;
     public TestDataManager testDataManager;
@@ -86,15 +89,21 @@ public class IceBlockCollision : MonoBehaviour
     {
         if (count == 0)
         {
-            TestDataEnd();
-            Q2MarkShow();
-            TestDataStart(1);
+            loading_sign.SetActive(true);
+            TestDataEnd(() => {
+                Q2MarkShow();
+                TestDataStart(1);
+                loading_sign.SetActive(false);
+            });
         }
         else if (count == 1)
         {
-            TestDataEnd();
-            TestDataStart(2);
-            iceBlockCollisionStage1UI.T213ShowUI();
+            loading_sign.SetActive(true);
+            TestDataEnd(() => {
+                TestDataStart(2);
+                iceBlockCollisionStage1UI.T213ShowUI();
+                loading_sign.SetActive(false);
+            });
         }
         else if (count == 2)
         {
@@ -110,9 +119,10 @@ public class IceBlockCollision : MonoBehaviour
         testDataManager.GetsId(countindex);
     }
 
-    public void TestDataEnd()
+    public void TestDataEnd(Action callback)
     {
         testDataManager.CompleteLevel();
-        testDataManager.EndLevel();
+        testDataManager.EndLevelWithCallback(callback);
+        // testDataManager.EndLevel();
     }
 }

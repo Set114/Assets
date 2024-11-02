@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 public class GlucoseScaleCube : MonoBehaviour
@@ -22,15 +23,17 @@ public class GlucoseScaleCube : MonoBehaviour
     private bool isMove = false;
     public bool a1 = false;
     public bool isParticleTriggered = false;
+    
+    public bool tempflag = true;
 
     void OnEnable()
     {
         levelindex = switchUI.GetLevelCount();
         Debug.Log("levelindex = " + levelindex);
-        if (levelindex == 2)
-        {
-            Button.onClick.AddListener(OnButtonClicked);
-        }
+        // if (levelindex == 2)
+        // {
+        //     Button.onClick.AddListener(OnButtonClicked);
+        // }
     }
 
     private void Update()
@@ -65,20 +68,18 @@ public class GlucoseScaleCube : MonoBehaviour
         Vector3 direction = Vector3.up;
         scaleCubeScript.ScaleInOneDirection(parameters.scale, direction, parameterDisplayText);
         
-
-         Debug.Log("A2 = " + a1);
-
         if (parameters.showHint)
         {
             if (a1)
             {
-                Debug.Log("A2 is true");
+                Debug.Log("A1 is true");
                 StartCoroutine(ActivateHintWithDelay(4.5f, hint2));
             }
             else
             {
-                Debug.Log("A1 is true");
+                Debug.Log("A1 is false");
                 StartCoroutine(ActivateHintWithDelay(4.5f, hint1));
+                a1 = true;
             }
         }
     }
@@ -90,11 +91,24 @@ public class GlucoseScaleCube : MonoBehaviour
         Debug.Log("hint is true");
         yield return new WaitForSeconds(delay);
         hint.SetActive(true);
-        a1 = true;
     }
 
     public void OnButtonClicked()
     {
-        UpdateScaleFactor(new ScaleFactorParameters(scale2,true));
+        GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
+        if (clickedButton != null)
+        {
+            Debug.Log("觸發此方法的按鈕是: " + clickedButton.name);
+        }
+        if (tempflag)
+        {
+            Debug.Log("目前物件的名稱是: " + gameObject.name);
+            UpdateScaleFactor(new ScaleFactorParameters(scale2,true));
+            Debug.Log("hint2 is ACTIVE");
+        }
+    }
+    public void NotToClickAgain()
+    {
+        tempflag = false;
     }
 }

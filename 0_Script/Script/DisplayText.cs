@@ -24,6 +24,7 @@ public class DisplayText : MonoBehaviour
     void OnEnable()
     {
         levelindex = switchUI.GetLevelCount();
+        Debug.Log("levelindex" + levelindex);
         if (levelindex == 2)
         {
             if (text != null)
@@ -43,7 +44,7 @@ public class DisplayText : MonoBehaviour
 
     private void Update()
     {
-        if (levelindex == 3)
+        if (levelindex == 2)
         {
             if (glucoseScaleCubeScript.isParticleTriggered && !a1)
             {

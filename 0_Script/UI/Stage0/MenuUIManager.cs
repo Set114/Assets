@@ -34,6 +34,10 @@ public class MenuUIManager : MonoBehaviour
     [Header("Slider")]
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider UIeffectSlider;
+    [Header("LoadingUI")]
+    [SerializeField] GameObject LoadingUI;
+    [Header("TempU3TestButton")]
+    [SerializeField] GameObject TestButton;
 
     public AudioManager audioManager;
     public GameManager gameManager;
@@ -75,6 +79,8 @@ public class MenuUIManager : MonoBehaviour
         if (shouldOpenMenu)
         {
             Login();
+        }else{
+            startMenuUI.SetActive(true);
         }
 
         // 事件綁定
@@ -110,11 +116,18 @@ public class MenuUIManager : MonoBehaviour
     {
         startMenuUI.SetActive(false);
         levelPanelUI.SetActive(true);
+        LoadingUI.SetActive(false);
         PlayUIeffect();
     }
 
     void EnterChapter(int chapterIndex)
     {
+        if(chapterIndex == 3)
+        {
+            TestButton.SetActive(false);
+        }else{
+            TestButton.SetActive(true);
+        }
         if (gameManager == null)
         {
             Debug.Log("GameManager is null. Please ensure it is properly initialized.");

@@ -32,7 +32,10 @@ public class calculateManager : MonoBehaviour
     private float fePrice;
     private float totalPrice;
     public static calculateManager Instance;
+    private CanvasController_Unit3 canvasController;
+
     public float initialTotalPrice = 300f;
+
     void Awake()
     {
         if (Instance == null)
@@ -49,14 +52,24 @@ public class calculateManager : MonoBehaviour
      {
         buybutton.onClick.AddListener(Onbuybutton);
 
-       cPrice = float.Parse(cMText.text);
-       nPrice = float.Parse(nMText.text);
-       oPrice = float.Parse(oMText.text);
-       hPrice = float.Parse(hMText.text);
-       fePrice = float.Parse(feMText.text);
-       totalPrice = initialTotalPrice; ;
-       UpdateTotalPrice(0);
+        cPrice = float.Parse(cMText.text);
+        nPrice = float.Parse(nMText.text);
+        oPrice = float.Parse(oMText.text);
+        hPrice = float.Parse(hMText.text);
+        fePrice = float.Parse(feMText.text);
+        totalPrice = initialTotalPrice;
+
+        canvasController = FindObjectOfType < CanvasController_Unit3>();
+
+        UpdateTotalPrice(0);
+
+        UpdateCText();
+        UpdateNText();
+        UpdateOText();
+        UpdateHText();
+        UpdateFeText();
      }
+
     public void OnCPlusClicked()
     {
         cCount++;
@@ -158,16 +171,29 @@ public class calculateManager : MonoBehaviour
 
     public void Onbuybutton()
     {
-        Allcalculationlevels aa = GetComponent<Allcalculationlevels>();
+        canvasController.Buy();
+        StartCoroutine(BuyProcess());
+    }
+    private IEnumerator BuyProcess()
+    {
+        ElementalBallCounter aa = FindObjectOfType<ElementalBallCounter>();
+        ElementDisplay elementDisplay = FindObjectOfType<ElementDisplay>();
+        DetectBall detectBall = FindObjectOfType<DetectBall>();
 
         if (aa != null)
         {
             aa.GetCounts(cCount, nCount, oCount, hCount, feCount);
+
+            // 延迟 
+            yield return new WaitForSeconds(0.2f);
+
+            detectBall.FindParts(); // 更新关卡
+            detectBall.CheckRequiredElementQuantities();
+            elementDisplay.UpdateDisplay(); // 更新显示
         }
-        
     }
 
-    public void ResetAllCounts()
+        public void ResetAllCounts()
     {
         cCount = 0;
         nCount = 0;

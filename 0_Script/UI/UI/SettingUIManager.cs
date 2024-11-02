@@ -29,7 +29,8 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] Sprite testMode_img;
     
     [Header("Text")]
-    [SerializeField] TMP_Text studentname_txt;
+    [SerializeField] Text studentname_txt;
+    [SerializeField] Text studentid_txt;
 
     [Header("UI")]
     [SerializeField] GameObject Account;
@@ -43,6 +44,7 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] Slider UIeffectSlider;
 
     private string studentData;
+    private string studentDataID;
     public int chapterModeData = 0;
     public SwitchUI switchUI;
     public AudioManager audioManager;
@@ -54,10 +56,12 @@ public class SettingUIManager : MonoBehaviour
         if (gameManager != null)
         {
             studentData = gameManager.GetCurrentPlayerName();
+            studentDataID = gameManager.GetPlayerID();
 
             if (!string.IsNullOrEmpty(studentData))
             {
                 studentname_txt.text = studentData;
+                studentid_txt.text = studentDataID;
                 chapterModeData = gameManager.GetChapterMode();
             }
             else
@@ -126,28 +130,32 @@ public class SettingUIManager : MonoBehaviour
 
     public void ChapterMode()
     {
-        Image modeButton_img = chapterMode_btn.GetComponent<Image>();
-
-        if (modeButton_img.sprite == learnMode_img)
+        int uidlevel = gameManager.GetUid();
+        if (uidlevel != 3)
         {
-            audioManager.Stop();
-            modeButton_img.sprite = testMode_img;
-            chapterModeData = 1;
-            gameManager.UpdateChapterMode(chapterModeData);
-            Learnimg.SetActive(false);
-            Testing.SetActive(true);
-            switchUI.ShowTestLevel();
+            Image modeButton_img = chapterMode_btn.GetComponent<Image>();
 
-        }
-        else if (modeButton_img.sprite == testMode_img)
-        {
-            audioManager.Stop();
-            modeButton_img.sprite = learnMode_img;
-            chapterModeData = 0;
-            gameManager.UpdateChapterMode(chapterModeData);
-            Learnimg.SetActive(true);
-            Testing.SetActive(false);
-            RefreshScene();
+            if (modeButton_img.sprite == learnMode_img)
+            {
+                audioManager.Stop();
+                modeButton_img.sprite = testMode_img;
+                chapterModeData = 1;
+                gameManager.UpdateChapterMode(chapterModeData);
+                Learnimg.SetActive(false);
+                Testing.SetActive(true);
+                switchUI.ShowTestLevel();
+
+            }
+            else if (modeButton_img.sprite == testMode_img)
+            {
+                audioManager.Stop();
+                modeButton_img.sprite = learnMode_img;
+                chapterModeData = 0;
+                gameManager.UpdateChapterMode(chapterModeData);
+                Learnimg.SetActive(true);
+                Testing.SetActive(false);
+                RefreshScene();
+            }
         }
     }
 
@@ -187,9 +195,35 @@ public class SettingUIManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    void RefreshScene()
+    public void RefreshScene()
     {
+        int checkUid = gameManager.GetUid();
+        if (checkUid == 3)
+        {
+            gameManager.UpdateChapterMode(0);
+        }
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    public void TempChapterMode()
+    {
+        Image modeButton_img = chapterMode_btn.GetComponent<Image>();
+
+        if (modeButton_img.sprite == learnMode_img)
+        {
+            audioManager.Stop();
+            modeButton_img.sprite = testMode_img;
+            chapterModeData = 1;
+            gameManager.UpdateChapterMode(chapterModeData);
+
+        }
+        else if (modeButton_img.sprite == testMode_img)
+        {
+            audioManager.Stop();
+            modeButton_img.sprite = learnMode_img;
+            chapterModeData = 0;
+            gameManager.UpdateChapterMode(chapterModeData);
+        }
     }
 }
